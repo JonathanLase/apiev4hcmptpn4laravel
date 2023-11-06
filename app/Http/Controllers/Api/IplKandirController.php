@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IplKandirRequest;
+use App\Http\Resources\IplKandirResource;
 use App\Models\Iplkandir;
 use Illuminate\Http\Request;
 
@@ -19,9 +21,11 @@ class IplKandirController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(IplKandirRequest $request)
     {
-        
+        $createIplKandir = Iplkandir::create($request->validated());
+
+        return new IplKandirResource($createIplKandir);
     }
 
     /**
